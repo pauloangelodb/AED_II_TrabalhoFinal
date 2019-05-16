@@ -1,24 +1,25 @@
 
-public class Dados {
-	int identidade, idade;
-	char sexo;
-	String nome, moradia, estadocivil, raca;
+public class Pessoa {
+	private double identidade;
+	private int idade;
+	private char sexo;
+	private String nome, moradia, estadocivil, raca;
 	
-	public void preencher (int id, String n, char s, int i, String m, String ec, String r) {
-		identidade = id;
-		nome = n;
-		sexo = s;
-		idade = i;
-		moradia = m;
-		estadocivil = ec;
-		raca = r;
+	public Pessoa (int identidade, String nome, char sexo, int idade, String moradia, String estadocivil, String raca) {
+		this.identidade = identidade;
+		this.nome = nome;
+		this.sexo = sexo;
+		this.idade = idade;
+		this.moradia = moradia;
+		this.estadocivil = estadocivil;
+		this.raca = raca;
 	}
 
-	public int getIdentidade() {
+	public double getIdentidade() {
 		return identidade;
 	}
 
-	public void setIdentidade(int identidade) {
+	public void setIdentidade(double identidade) {
 		this.identidade = identidade;
 	}
 
@@ -54,11 +55,11 @@ public class Dados {
 		this.moradia = moradia;
 	}
 
-	public String getEstadocivil() {
+	public String getEstadoCivil() {
 		return estadocivil;
 	}
 
-	public void setEstadocivil(String estadocivil) {
+	public void setEstadoCivil(String estadocivil) {
 		this.estadocivil = estadocivil;
 	}
 

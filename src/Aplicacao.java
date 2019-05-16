@@ -4,6 +4,9 @@ public class Aplicacao {
 
 public static void main(String[] args) throws IOException {
 	
+		CelulaPessoa novaPessoa;
+		ArvorePessoas pessoas = new ArvorePessoas();
+		
 		String dados[] = new String [7];
 		String pessoa;
 		ArquivoTextoLeitura censo = new ArquivoTextoLeitura();

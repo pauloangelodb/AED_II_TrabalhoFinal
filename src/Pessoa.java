@@ -1,25 +1,25 @@
 
 public class Pessoa {
-	private double identidade;
+	private long identidade;
 	private int idade;
 	private char sexo;
-	private String nome, moradia, estadocivil, raca;
+	private String nome, moradia, estadocivil, cor;
 	
-	public Pessoa (int identidade, String nome, char sexo, int idade, String moradia, String estadocivil, String raca) {
-		this.identidade = identidade;
-		this.nome = nome;
-		this.sexo = sexo;
-		this.idade = idade;
-		this.moradia = moradia;
-		this.estadocivil = estadocivil;
-		this.raca = raca;
+	public Pessoa (long identidade, String nome, char sexo, int idade, String moradia, String estadocivil, String cor) {
+		this.setIdentidade(identidade);
+		this.setNome(nome);
+		this.setSexo(sexo);
+		this.setIdade(idade);
+		this.setMoradia(moradia);
+		this.setEstadoCivil(estadocivil);
+		this.setCor(cor);
 	}
-
-	public double getIdentidade() {
+	
+	public long getIdentidade() {
 		return identidade;
 	}
 
-	public void setIdentidade(double identidade) {
+	public void setIdentidade(long identidade) {
 		this.identidade = identidade;
 	}
 
@@ -63,12 +63,12 @@ public class Pessoa {
 		this.estadocivil = estadocivil;
 	}
 
-	public String getRaca() {
-		return raca;
+	public String getCor() {
+		return cor;
 	}
 
-	public void setRaca(String raca) {
-		this.raca = raca;
+	public void setCor(String cor) {
+		this.cor = cor;
 	}
 
 }

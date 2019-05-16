@@ -1,18 +1,18 @@
 
 public class CelulaPessoa {
 	
-	Pessoa dados;	
+	Pessoa pessoa;	
 	CelulaPessoa esquerda;
 	CelulaPessoa direita;
 	
-	public CelulaPessoa(Pessoa registro) {
-		dados = registro;
+	public CelulaPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 		esquerda = null;
 		direita = null;
 	}
 
 	public CelulaPessoa getEsquerda() {
-		return esquerda;
+		return this.esquerda;
 	}
 
 	public void setEsquerda(CelulaPessoa esquerda) {
@@ -20,7 +20,7 @@ public class CelulaPessoa {
 	}
 
 	public CelulaPessoa getDireita() {
-		return direita;
+		return this.direita;
 	}
 
 	public void setDireita(CelulaPessoa direita) {
@@ -28,6 +28,6 @@ public class CelulaPessoa {
 	}
 
 	public Pessoa getDados() {
-		return dados;
+		return this.pessoa;
 	}
 }

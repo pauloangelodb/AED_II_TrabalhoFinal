@@ -1,3 +1,4 @@
+12345;Teste;M;21;Casa;Solteiro;Parda
 12427;ALAN A. A. ALMEIDA;F;54;Urbana;Casado;Branca
 92334;ALAN A. A. ASSUNCAO;M;4;Urbana;Solteiro;Indigena
 242716;ALAN A. A. CERQUEIRA;F;15;Urbana;Solteiro;Preta

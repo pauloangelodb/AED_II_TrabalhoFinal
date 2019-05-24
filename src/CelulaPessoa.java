@@ -1,14 +1,20 @@
 
 public class CelulaPessoa {
 	
-	Pessoa pessoa;	
-	CelulaPessoa esquerda;
-	CelulaPessoa direita;
+	Pessoa pessoa;
+	int altura;
+	CelulaPessoa esquerda, direita;
+	
 	
 	public CelulaPessoa(Pessoa pessoa) {
+		this(pessoa, null, null, 0);
+	}
+	
+	public CelulaPessoa(Pessoa pessoa, CelulaPessoa esquerda, CelulaPessoa direita, int altura) {
 		this.pessoa = pessoa;
-		esquerda = null;
-		direita = null;
+		this.esquerda = esquerda;
+		this.direita = direita;
+		this.altura = altura;
 	}
 
 	public CelulaPessoa getEsquerda() {
@@ -25,6 +31,14 @@ public class CelulaPessoa {
 
 	public void setDireita(CelulaPessoa direita) {
 		this.direita = direita;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
 	}
 
 	public Pessoa getDados() {

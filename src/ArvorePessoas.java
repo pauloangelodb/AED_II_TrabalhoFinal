@@ -23,25 +23,88 @@ public class ArvorePessoas {
 			return false;
 	}
 
+	private int alturaCelula(CelulaPessoa celulaPessoa) {
+		return celulaPessoa == null ? -1 : celulaPessoa.altura;
+	}
+
+	private int alturaMax( int alturaEsqueda, int alturaDireira ) {
+		return alturaEsqueda > alturaDireira ? alturaEsqueda : alturaDireira;
+	}
+
+	private int fatorBalanceamento (CelulaPessoa celulaPessoa) {
+		return this.alturaCelula(celulaPessoa.esquerda) - this.alturaCelula(celulaPessoa.direita);
+	}
+
+	public CelulaPessoa balanceamento (CelulaPessoa celulaPessoa) {
+		if (fatorBalanceamento(celulaPessoa) == 2) {
+			if (fatorBalanceamento (celulaPessoa.esquerda) > 0)
+				celulaPessoa = rotacaoSimplesDireita(celulaPessoa);
+			else
+				celulaPessoa = rotacaoDuplaDireita(celulaPessoa);
+		}
+		else if (fatorBalanceamento(celulaPessoa) == -2) {
+			if (fatorBalanceamento(celulaPessoa.direita) < 0)
+				celulaPessoa = rotacaoSimplesEsquerda(celulaPessoa);
+			else
+				celulaPessoa = rotacaoDuplaEsquerda(celulaPessoa);
+		}
+		celulaPessoa.altura = alturaMax(alturaCelula(celulaPessoa.esquerda), alturaCelula(celulaPessoa.direita)) + 1;
+		return celulaPessoa;
+	}
+
+	private CelulaPessoa rotacaoSimplesDireita(CelulaPessoa celulaRaiz) {
+		CelulaPessoa novaRaiz = celulaRaiz.esquerda;
+		celulaRaiz.esquerda = novaRaiz.direita;
+		novaRaiz.direita = celulaRaiz;
+
+		celulaRaiz.altura = alturaMax(alturaCelula(celulaRaiz.esquerda), alturaCelula(celulaRaiz.direita)) + 1;
+		novaRaiz.altura = alturaMax(alturaCelula(novaRaiz.esquerda), alturaCelula(novaRaiz.direita)) + 1;
+		return novaRaiz;
+	}
+
+	private CelulaPessoa rotacaoSimplesEsquerda( CelulaPessoa celulaRaiz ) {
+		CelulaPessoa novaRaiz = celulaRaiz.direita;
+		celulaRaiz.direita = novaRaiz.esquerda;
+		novaRaiz.esquerda = celulaRaiz;
+
+		celulaRaiz.altura = alturaMax(alturaCelula(celulaRaiz.esquerda), alturaCelula(celulaRaiz.direita)) + 1;
+		novaRaiz.altura = alturaMax(alturaCelula(novaRaiz.esquerda), alturaCelula(novaRaiz.direita)) + 1;
+		return novaRaiz;
+	}
+
+	private CelulaPessoa rotacaoDuplaDireita(CelulaPessoa celulaPessoa) {
+		celulaPessoa.esquerda = rotacaoSimplesEsquerda(celulaPessoa.esquerda);
+		return rotacaoSimplesDireita(celulaPessoa);
+	}
+
+	private CelulaPessoa rotacaoDuplaEsquerda(CelulaPessoa celulaPessoa) {
+		celulaPessoa.direita = rotacaoSimplesDireita(celulaPessoa.direita);
+		return rotacaoSimplesEsquerda(celulaPessoa);
+	}
+
 	private CelulaPessoa adicionar(CelulaPessoa raizArvore, Pessoa pessoaNova) {
 		if (raizArvore == null)
 			raizArvore = new CelulaPessoa(pessoaNova);
-		else
-		{
-			if (raizArvore.pessoa.getIdentidade() > pessoaNova.getIdentidade())
-				raizArvore.esquerda = adicionar(raizArvore.esquerda, pessoaNova);
-			else
-			{
-				if (raizArvore.pessoa.getIdentidade() < pessoaNova.getIdentidade())
-					raizArvore.direita = adicionar(raizArvore.direita, pessoaNova);
-				else
-					System.out.println("A pessoa " + pessoaNova.getNome() + " (identidade " + pessoaNova.getIdentidade() + ") jï¿½ foi inserida anteriormente na ï¿½rvore.");
-			}
+		else if (raizArvore.pessoa.getIdentidade() > pessoaNova.getIdentidade()) {
+			raizArvore.esquerda = adicionar(raizArvore.esquerda, pessoaNova);
 		}
-		return raizArvore;
+		else if (raizArvore.pessoa.getIdentidade() < pessoaNova.getIdentidade()) {
+			raizArvore.direita = adicionar(raizArvore.direita, pessoaNova);
+		}
+		else {
+			System.out.println("A pessoa " + pessoaNova.getNome() +
+					" (identidade " + pessoaNova.getIdentidade() +
+					") já foi inserida anteriormente na árvore.");
+		}
+		return this.balanceamento(raizArvore);
 	}
 
 	public void adicionar(Pessoa pessoaNova) {
+		this.raiz = adicionar(this.raiz, pessoaNova);
+		this.escreverArquivo();
+	}
+	
+	private void adicionarInterno(Pessoa pessoaNova) {
 		this.raiz = adicionar(this.raiz, pessoaNova);
 	}
 
@@ -59,39 +122,6 @@ public class ArvorePessoas {
 			pessoaRetirar.pessoa.setCor(raizArvore.pessoa.getCor());
 			return raizArvore.esquerda;
 		}
-	}
-
-	private CelulaPessoa remover(CelulaPessoa raizArvore, double identidade) {
-		if (raizArvore == null) {
-			System.out.println("a pessoa (identidade " + identidade + ") nï¿½o foi encontrada.");
-			return raizArvore;
-		} else {
-			if (raizArvore.pessoa.getIdentidade() == identidade)
-			{
-				if (raizArvore.direita == null)
-					return (raizArvore.esquerda);
-				else {
-					if (raizArvore.esquerda == null)
-						return (raizArvore.direita);
-					else {
-						raizArvore.esquerda = antecessor(raizArvore, raizArvore.esquerda);
-						return (raizArvore);
-					}
-				}
-			}
-			else
-			{
-				if (raizArvore.pessoa.getIdentidade() > identidade)
-					raizArvore.esquerda = remover(raizArvore.esquerda, identidade);
-				else
-					raizArvore.direita = remover(raizArvore.direita, identidade);
-				return raizArvore;
-			}
-		}
-	}
-
-	public void remover(double identidadeRemover) {
-		this.raiz = remover(this.raiz, identidadeRemover);
 	}
 
 	private Pessoa localizar(CelulaPessoa celula, long identidade) {
@@ -113,6 +143,42 @@ public class ArvorePessoas {
 	public Pessoa localizar(long identidade) {
 		return this.localizar(this.raiz, identidade);
 	}
+	
+	public void atualizar() {
+		this.escreverArquivo();
+	}
+	
+	private CelulaPessoa remover(CelulaPessoa raizArvore, double identidade) {
+		if (raizArvore == null) {
+			System.out.println("A pessoa (identidade " + identidade + ") não foi encontrada.");
+			return raizArvore;
+		} else {
+			if (raizArvore.pessoa.getIdentidade() == identidade) {
+				if (raizArvore.direita == null)
+					return (raizArvore.esquerda);
+				else {
+					if (raizArvore.esquerda == null)
+						return (raizArvore.direita);
+					else {
+						raizArvore.esquerda = antecessor(raizArvore, raizArvore.esquerda);
+						return (raizArvore);
+					}
+				}
+			}
+			else {
+				if (raizArvore.pessoa.getIdentidade() > identidade)
+					raizArvore.esquerda = remover(raizArvore.esquerda, identidade);
+				else
+					raizArvore.direita = remover(raizArvore.direita, identidade);
+				return raizArvore;
+			}
+		}
+	}
+
+	public void remover(double identidadeRemover) {
+		this.raiz = remover(this.raiz, identidadeRemover);
+		this.escreverArquivo();
+	}
 
 	private void lerArquivo(String nomeArquivo) {
 		try (BufferedReader entrada = new BufferedReader(new FileReader(nomeArquivo))){
@@ -127,7 +193,7 @@ public class ArvorePessoas {
 						dadosSplit[4],
 						dadosSplit[5],
 						dadosSplit[6]);
-				this.adicionar(pessoa);
+				this.adicionarInterno(pessoa);
 			}
 		} catch (FileNotFoundException excecao) {
 			System.out.println("Arquivo não encontrado.");
@@ -136,10 +202,10 @@ public class ArvorePessoas {
 		}
 	}
 
-	public void escreverArquivo() {
+	private void escreverArquivo() {
 		this.escreverArquivo(this.nomeDoArquivo);
 	}
-	
+
 	public void escreverArquivo(String nomeArquivo) {
 		File file = new File(nomeArquivo);
 		if(file.exists())
@@ -169,5 +235,17 @@ public class ArvorePessoas {
 		if (celula.direita != null) {
 			percorrerEmOrdem(celula.direita, nomeArquivo);
 		}
+	}
+
+	public int[] RelatorioCategoria() {
+		int [] estatistica = new int [20];
+		// TODO Auto-generated method stub
+		return estatistica;
+	}
+
+	public int[] RelatorioEstatistico() {
+		int [] estatistica = new int [9];
+		// TODO Auto-generated method stub
+		return estatistica;
 	}
 }

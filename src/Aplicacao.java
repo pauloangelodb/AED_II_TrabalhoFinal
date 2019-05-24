@@ -21,7 +21,6 @@ public class Aplicacao {
 						"0 - Sair" + "\n"
 						, "Menu", 1));
 			} catch (NumberFormatException e) {
-				lista.escreverArquivo();
 				key = -1;
 			}
 			
@@ -58,12 +57,10 @@ public class Aplicacao {
 						JOptionPane.showInputDialog(null, "Moradia:", "Criar Cadastro", 1),
 						JOptionPane.showInputDialog(null, "Estado Civil:", "Criar Cadastro", 1),
 						JOptionPane.showInputDialog(null, "Cor:", "Criar Cadastro", 1)));
-				lista.escreverArquivo();
 				break;
 				
 			case 3:
 				lista.remover(Long.parseLong(JOptionPane.showInputDialog(null, "Identidade:", "Excluir Cadastro", 1)));
-				lista.escreverArquivo();
 				break;
 				
 			case 4:
@@ -123,16 +120,16 @@ public class Aplicacao {
 							"Estado Civil: " + pessoa.getEstadoCivil() + "\n" +
 							"Cor: " + pessoa.getCor()
 							, null, 1);
-					lista.escreverArquivo();
 				}
+				lista.atualizar();
 				break;
 				
 			case 5:
-				RelatorioCategoria();
+				RelatorioCategoria(lista.RelatorioCategoria());
 				break;
 				
 			case 6:
-				RelatorioEstatistico();
+				RelatorioEstatistico(lista.RelatorioEstatistico());
 				break;
 				
 			case 0:
@@ -147,8 +144,7 @@ public class Aplicacao {
 		ler.close();
 	}
 
-	static void RelatorioCategoria() {
-		
+	static void RelatorioCategoria(int[] estatistica) {
 		JOptionPane.showMessageDialog(null, 
 				"\n------------------------------------------------------------------------------------------\n" +
 				"\nRELATÓRIO DE CATEGORIZAÇÃO\n" +
@@ -188,7 +184,7 @@ public class Aplicacao {
 				, null, 1);
 	}
 	
-	static void RelatorioEstatistico() {
+	static void RelatorioEstatistico(int[] estatistica) {
 		
 		JOptionPane.showMessageDialog(null, 
 				"\n------------------------------------------------------------------------------------------\n" +

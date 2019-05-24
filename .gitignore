@@ -1,1 +1,5 @@
-.class
+# Para arquivos Java compilados
+*.class
+# lauch.json do vs code
+launch.json
+.metadata

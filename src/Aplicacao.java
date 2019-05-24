@@ -16,6 +16,8 @@ public class Aplicacao {
 						"2 - Incluir" + "\n" +
 						"3 - Excluir" + "\n" +
 						"4 - Alterar" + "\n" +
+						"5 - Exibir Relatório de Categorização" + "\n" +
+						"6 - Exibir Relatório Estatístico" + "\n" +
 						"0 - Sair" + "\n"
 						, "Menu", 1));
 			} catch (NumberFormatException e) {
@@ -125,9 +127,17 @@ public class Aplicacao {
 				}
 				break;
 				
+			case 5:
+				RelatorioCategoria();
+				break;
+				
+			case 6:
+				RelatorioEstatistico();
+				break;
+				
 			case 0:
 				key = -1;
-			break;
+				break;
 			
 			default:
 				break;
@@ -135,20 +145,68 @@ public class Aplicacao {
 		}
 		
 		ler.close();
+	}
 
-		//		CelulaPessoa novaPessoa;
-		//		ArvorePessoas pessoas = new ArvorePessoas();
-		//		
-		//		String dados[] = new String [7];
-		//		String pessoa;
-		//		ArquivoTextoLeitura censo = new ArquivoTextoLeitura();
-		//
-		//		censo.abrirArquivo("dados ibge pequeno.txt");
-		//		
-		//		while (!censo.equals(null)) {
-		//			pessoa = censo.ler();
-		//			dados = pessoa.split(";");
-		//			System.out.print(dados[1]);	
-		//		}	
+	static void RelatorioCategoria() {
+		
+		JOptionPane.showMessageDialog(null, 
+				"\n------------------------------------------------------------------------------------------\n" +
+				"\nRELATÓRIO DE CATEGORIZAÇÃO\n" +
+				"\n------------------------------------------------------------------------------------------\n" +
+				"\nPopulação total: " + "\n" +
+				"\n------------------------------------------------------------------------------------------\n" +	
+				"\nCaracterização\nSexo\n" +
+				"Feminino: " + " (" + "%)" + "\n" +
+				"Masculino: " + " (" + "%)" + "\n" +
+				"\n------------------------------------------------------------------------------------------\n" +		
+				"\nEstado Civil\n" +
+				"Solteiro(a): " + " (" + "%)" + "\n" +
+				"Casado(a): " + " (" + "%)" + "\n" +
+				"Divorciado(a): " + " (" + "%)" + "\n" +
+				"Viúvo(a): " + " (" + "%)" + "\n" +
+				"\n------------------------------------------------------------------------------------------\n" +	
+				"\nMoradia\n" +
+				"Rural: " + " (" + "%)" + "\n" +
+				"Urbana: " + " (" + "%)" + "\n" +
+				"\n-----------------------------------------------------------------------------------------\n" +		
+				"\nFaixa Etária\n" +
+				" 0 a 12 anos: " + " (" + "%)" + "\n" +
+				"13 a 19 anos: " + " (" + "%)" + "\n" +
+				"20 a 25 anos: " + " (" + "%)" + "\n" +
+				"26 a 30 anos: " + " (" + "%)" + "\n" +
+				"31 a 45 anos: " + " (" + "%)" + "\n" +
+				"46 a 65 anos: " + " (" + "%)" + "\n" +
+				"Mais de 65 anos: " + " (" + "%)" + "\n" +
+				"\n------------------------------------------------------------------------------------------\n" +	
+				"\nCor\n" +
+				"Parda: " + " (" + "%)" + "\n" +
+				"Preta: " + " (" + "%)" + "\n" +
+				"Branca: " + " (" + "%)" + "\n" +
+				"Amarela: " + " (" + "%)" + "\n" +
+				"Indígena: " + " (" + "%)" + "\n" +
+				"------------------------------------------------------------------------------------------\n\n"
+				, null, 1);
+	}
+	
+	static void RelatorioEstatistico() {
+		
+		JOptionPane.showMessageDialog(null, 
+				"\n------------------------------------------------------------------------------------------\n" +
+				"\nRELATÓRIO ESTATÍSTICO\n" +
+				"\n------------------------------------------------------------------------------------------\n" +
+				"\nMédia de idade geral: " + " anos\n" +
+				"\n------------------------------------------------------------------------------------------\n" +	
+				"\nCategorizada por sexo:\n" +
+				"Feminino: " + " anos" + "                 Masculino: " + " anos\n" +
+				"\n------------------------------------------------------------------------------------------\n" +		
+				"\nCategorizada por moradia:\n" +
+				"Rural: " + " anos" + "                    Urbana: " + " anos\n" +
+				"\n------------------------------------------------------------------------------------------\n" +	
+				"\nSolteiros e casados\n" +
+				"                       Média de idade        Desvio padrão\n" +
+				"Solteiros:   " + " anos" + "                        " + " anos\n" +
+				"Casados:    " + " anos" + "                        " + " anos\n" +
+				"------------------------------------------------------------------------------------------\n\n"
+				, null, 1);
 	}
 }

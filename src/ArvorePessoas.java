@@ -8,13 +8,19 @@ import java.io.IOException;
 
 public class ArvorePessoas {
 	private CelulaPessoa raiz;
+
 	String nomeDoArquivo;
 	private int[] estatistica = new int[28];
+	private int[] desvio = null;
 
 	public ArvorePessoas(String nomeDoArquivo) {
 		this.raiz = null;
 		this.nomeDoArquivo = nomeDoArquivo;
 		this.lerArquivo(nomeDoArquivo);
+	}
+
+	public CelulaPessoa getRaiz() {
+		return this.raiz;
 	}
 
 	public Boolean arvoreVazia() {
@@ -239,6 +245,24 @@ public class ArvorePessoas {
 		if (celula.direita != null) {
 			percorrerEmOrdem(celula.direita, nomeArquivo);
 		}
+	}
+	
+	public int[] buscaDesvioIdade(String estadoCivil, CelulaPessoa celula, int pos) {
+
+		int novaPos = pos;
+		if (celula.esquerda != null) {
+			buscaDesvioIdade(estadoCivil, celula.esquerda, novaPos);
+		}
+		if (celula != null) {
+			if(celula.pessoa.getEstadoCivil().toUpperCase() == estadoCivil.toUpperCase()){
+				desvio[pos] = celula.pessoa.getIdade();
+				novaPos++;
+			}
+		}
+		if (celula.direita != null) {
+			buscaDesvioIdade(estadoCivil, celula.direita, novaPos);
+		}
+		return desvio;
 	}	
 
 	public int[] getEstatistica() {

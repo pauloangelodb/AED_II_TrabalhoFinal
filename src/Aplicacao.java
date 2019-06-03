@@ -205,8 +205,12 @@ public class Aplicacao {
 	 	return (float)arredonda/ 100;
 	}
 
-	static float desvioPadrao(int somatorio, int total) {
+	static float desvioPadrao(ArvorePessoas lista, int somatorio, int total) {
 		float desvio = 0;
+		int[] idades;
+		
+		idades = lista.buscaDesvioIdade("SOLTEIRO", lista.getRaiz(), 0);
+		
 		return desvio;
 	}
 
@@ -229,7 +233,7 @@ public class Aplicacao {
 				"\n------------------------------------------------------------------------------------------\n" +	
 				"\nSolteiros e casados\n" +
 				"                       Média de idade        Desvio padrão\n" +
-				"Solteiros:   " + media(dados[26],dados[3]) + " anos" + "                        " + desvioPadrao(dados[26],dados[3]) + " anos\n" +
+				"Solteiros:   " + media(dados[26],dados[3]) + " anos" + "                        " + desvioPadrao(lista, dados[26],dados[3]) + " anos\n" +
 				"Casados:    " + media(dados[27],dados[4]) + " anos" + "                        " + " anos\n" +
 				"------------------------------------------------------------------------------------------\n\n"
 				, null, 1);

@@ -9,6 +9,7 @@ import java.io.IOException;
 public class ArvorePessoas {
 	private CelulaPessoa raiz;
 	String nomeDoArquivo;
+	private int[] estatistica = new int[28];
 
 	public ArvorePessoas(String nomeDoArquivo) {
 		this.raiz = null;
@@ -202,7 +203,7 @@ public class ArvorePessoas {
 		}
 	}
 
-	private void escreverArquivo() {
+	void escreverArquivo() {
 		this.escreverArquivo(this.nomeDoArquivo);
 	}
 
@@ -226,6 +227,9 @@ public class ArvorePessoas {
 				saida.write(celula.pessoa.getMoradia() + ";");
 				saida.write(celula.pessoa.getEstadoCivil() + ";");
 				saida.write(celula.pessoa.getCor() + "\n");
+				
+				ColetaDados(celula.pessoa);
+				
 			} catch (FileNotFoundException excecao) {
 				System.out.println("Arquivo não encontrado.");
 			} catch (IOException excecao) {
@@ -235,17 +239,128 @@ public class ArvorePessoas {
 		if (celula.direita != null) {
 			percorrerEmOrdem(celula.direita, nomeArquivo);
 		}
-	}
+	}	
 
-	public int[] RelatorioCategoria() {
-		int [] estatistica = new int [20];
-		// TODO Auto-generated method stub
+	public int[] getEstatistica() {
 		return estatistica;
 	}
 
-	public int[] RelatorioEstatistico() {
-		int [] estatistica = new int [9];
+	public void setEstatistica(int[] estatistica) {
+		this.estatistica = estatistica;
+	}
+
+	private void ColetaDados(Pessoa pessoa) {
+		/* Referencia:
+		 * 
+		 * estat[0] = total geral
+		 * estat[1] = total feminino
+		 * estat[2] = total masculino
+		 * estat[3] = total solteiros
+		 * estat[4] = total casados
+		 * estat[5] = total divorciados
+		 * estat[6] = total viuvos
+		 * estat[7] = total urbanos
+		 * estat[8] = total rurais
+		 * estat[9] = total 0 a 12
+		 * estat[10] = total 13 a 19
+		 * estat[11] = total 20 a 25
+		 * estat[12] = total 26 a 30
+		 * estat[13] = total 31 a 45
+		 * estat[14] = total 46 a 65
+		 * estat[15] = total 65 mais
+		 * estat[16] = total pardos
+		 * estat[17] = total pretos
+		 * estat[18] = total brancos
+		 * estat[19] = total amarelos
+		 * estat[20] = total indigenas
+		 * 
+		 * estat[21] = soma idade geral
+		 * estat[22] = soma idade femininos
+		 * estat[23] = soma idade masculinos
+		 * estat[24] = soma idade urbanos
+		 * estat[25] = soma idade rurais
+		 * estat[26] = soma idade solteiros
+		 * estat[27] = soma idade casados
+		 */
+		
+		this.estatistica[0] ++;
+		
+		if(pessoa.getSexo() == 'F') {
+			this.estatistica[1] ++;
+			this.estatistica[22] += pessoa.getIdade();
+		}
+		else if(pessoa.getSexo() == 'M') {
+			this.estatistica[2] ++;
+			this.estatistica[23] += pessoa.getIdade();
+		}
+
+		if(pessoa.getEstadoCivil().equals("Solteiro")) {
+			this.estatistica[3] ++;
+			this.estatistica[26] += pessoa.getIdade();
+		}
+		else if(pessoa.getEstadoCivil().equals("Casado")) {
+			this.estatistica[4] ++;
+			this.estatistica[27] += pessoa.getIdade();
+		}
+		else if(pessoa.getEstadoCivil().equals("Divorciado"))
+			this.estatistica[5] ++;
+		else if(pessoa.getEstadoCivil().equals("Viúvo"))
+			this.estatistica[6] ++;
+
+		if(pessoa.getMoradia().equals("Urbana")) {
+			this.estatistica[7] ++;
+			this.estatistica[24] += pessoa.getIdade();
+		}
+		else if(pessoa.getMoradia().equals("Rural")) {
+			this.estatistica[8] ++;
+			this.estatistica[25] += pessoa.getIdade();
+		}
+
+		if(pessoa.getIdade() <= 12)
+			this.estatistica[9] ++;
+		else if(pessoa.getIdade() >= 13 && pessoa.getIdade() <= 19)
+			this.estatistica[10] ++;
+		else if(pessoa.getIdade() >= 20 && pessoa.getIdade() <= 25)
+			this.estatistica[11] ++;
+		else if(pessoa.getIdade() >= 26 && pessoa.getIdade() <= 30)
+			this.estatistica[12] ++;
+		else if(pessoa.getIdade() >= 31 && pessoa.getIdade() <= 45)
+			this.estatistica[13] ++;
+		else if(pessoa.getIdade() >= 46 && pessoa.getIdade() <= 65)
+			this.estatistica[14] ++;
+		else if(pessoa.getIdade() > 65)
+			this.estatistica[15] ++;
+
+		if(pessoa.getCor().equals("Parda"))
+			this.estatistica[16] ++;
+		else if(pessoa.getCor().equals("Preta"))
+			this.estatistica[17] ++;
+		else if(pessoa.getCor().equals("Branca"))
+			this.estatistica[18] ++;
+		else if(pessoa.getCor().equals("Amarela"))
+			this.estatistica[19] ++;
+		else if(pessoa.getCor().equals("Indigena"))
+			this.estatistica[20] ++;		
+
+		this.estatistica[21] += pessoa.getIdade();
+	}
+
+	public int[] Dados() {
+		//int [] estatistica = new int [20];
 		// TODO Auto-generated method stub
-		return estatistica;
+		return this.estatistica;
+	}
+//
+//	public int[] DadosEstatistico() {
+//		int [] estatistica = new int [9];
+//		// TODO Auto-generated method stub
+//		return estatistica;
+//	}
+
+	public void limparColeta() {
+		
+		for(int i=0; i < this.estatistica.length; i++) {
+			this.estatistica[i] = 0;
+		}		
 	}
 }

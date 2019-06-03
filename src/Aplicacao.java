@@ -30,7 +30,7 @@ public class Aplicacao {
 			switch (key) {
 			case 1:
 				try {
-					identidade = Long.parseLong(JOptionPane.showInputDialog(null, "Identidade:", "Localizar", 1));
+					identidade = Long.parseLong(JOptionPane.showInputDialog(null, "Digite o nº de Identidade da pessoa:", "Localizar", 1));
 				} catch (NumberFormatException e) {
 				}
 				pessoa = lista.localizar(identidade);
@@ -38,8 +38,8 @@ public class Aplicacao {
 					JOptionPane.showMessageDialog(null, "Não Encontrado.", null, 0);
 				}else {
 					JOptionPane.showMessageDialog(null, 
-							pessoa.getNome() + "\n" +
-							" Identidade: " + pessoa.getIdentidade() + "\n" +
+							"Nome: " + pessoa.getNome() + "\n" +
+							"Identidade: " + pessoa.getIdentidade() + "\n" +
 							"Sexo: " + pessoa.getSexo() + "\n" +
 							"Idade: " + pessoa.getIdade() + "\n" +
 							"Moradia: " + pessoa.getMoradia() + "\n" +
@@ -51,13 +51,13 @@ public class Aplicacao {
 
 			case 2:
 				lista.adicionar(new Pessoa(
-						Long.parseLong(JOptionPane.showInputDialog(null, "Identidade:", "Criar Cadastro", 1)),
-						JOptionPane.showInputDialog(null, "Nome:", "Criar Cadastro", 1),
+						Long.parseLong(JOptionPane.showInputDialog(null, "Nº de Identidade:", "Criar Cadastro", 1)),
+						JOptionPane.showInputDialog(null, "Nome Completo:", "Criar Cadastro", 1),
 						JOptionPane.showInputDialog(null, "Sexo (M/F):", "Criar Cadastro", 1).charAt(0),
 						Integer.parseInt(JOptionPane.showInputDialog(null, "Idade:", "Criar Cadastro", 1)),
-						JOptionPane.showInputDialog(null, "Moradia:", "Criar Cadastro", 1),
-						JOptionPane.showInputDialog(null, "Estado Civil:", "Criar Cadastro", 1),
-						JOptionPane.showInputDialog(null, "Cor:", "Criar Cadastro", 1)));
+						JOptionPane.showInputDialog(null, "Moradia (Urbana/Rural):", "Criar Cadastro", 1),
+						JOptionPane.showInputDialog(null, "Estado Civil (Solteiro/Casado/Divorciado/Viúvo):", "Criar Cadastro", 1),
+						JOptionPane.showInputDialog(null, "Cor (Parda/Preta/Branca/Amarela/Indígena):", "Criar Cadastro", 1)));
 				lista.escreverArquivo();
 				break;
 				

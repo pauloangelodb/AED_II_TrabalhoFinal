@@ -115,12 +115,12 @@ public class ArvorePessoas {
 			return raizArvore;
 		} else {
 			pessoaRetirar.pessoa.setIdentidade(raizArvore.pessoa.getIdentidade());
-			pessoaRetirar.pessoa.setNome(raizArvore.pessoa.getNome());
+			pessoaRetirar.pessoa.setNome(raizArvore.pessoa.getNome().toUpperCase());
 			pessoaRetirar.pessoa.setSexo(raizArvore.pessoa.getSexo());
 			pessoaRetirar.pessoa.setIdade(raizArvore.pessoa.getIdade());
-			pessoaRetirar.pessoa.setMoradia(raizArvore.pessoa.getMoradia());
-			pessoaRetirar.pessoa.setEstadoCivil(raizArvore.pessoa.getEstadoCivil());
-			pessoaRetirar.pessoa.setCor(raizArvore.pessoa.getCor());
+			pessoaRetirar.pessoa.setMoradia(raizArvore.pessoa.getMoradia().toUpperCase());
+			pessoaRetirar.pessoa.setEstadoCivil(raizArvore.pessoa.getEstadoCivil().toUpperCase());
+			pessoaRetirar.pessoa.setCor(raizArvore.pessoa.getCor().toUpperCase());
 			return raizArvore.esquerda;
 		}
 	}
@@ -221,12 +221,12 @@ public class ArvorePessoas {
 		if (celula != null) {
 			try (BufferedWriter saida = new BufferedWriter(new FileWriter(nomeArquivo, true))){
 				saida.write(Long.toString(celula.pessoa.getIdentidade()) + ";");
-				saida.write(celula.pessoa.getNome() + ";");
+				saida.write(celula.pessoa.getNome().toUpperCase() + ";");
 				saida.write(celula.pessoa.getSexo() + ";");
 				saida.write(celula.pessoa.getIdade() + ";");
-				saida.write(celula.pessoa.getMoradia() + ";");
-				saida.write(celula.pessoa.getEstadoCivil() + ";");
-				saida.write(celula.pessoa.getCor() + "\n");
+				saida.write(celula.pessoa.getMoradia().toUpperCase() + ";");
+				saida.write(celula.pessoa.getEstadoCivil().toUpperCase() + ";");
+				saida.write(celula.pessoa.getCor().toUpperCase() + "\n");
 				
 				ColetaDados(celula.pessoa);
 				
@@ -294,24 +294,24 @@ public class ArvorePessoas {
 			this.estatistica[23] += pessoa.getIdade();
 		}
 
-		if(pessoa.getEstadoCivil().equals("Solteiro")) {
+		if(pessoa.getEstadoCivil().toUpperCase().equals("SOLTEIRO")) {
 			this.estatistica[3] ++;
 			this.estatistica[26] += pessoa.getIdade();
 		}
-		else if(pessoa.getEstadoCivil().equals("Casado")) {
+		else if(pessoa.getEstadoCivil().toUpperCase().equals("CASADO")) {
 			this.estatistica[4] ++;
 			this.estatistica[27] += pessoa.getIdade();
 		}
-		else if(pessoa.getEstadoCivil().equals("Divorciado"))
+		else if(pessoa.getEstadoCivil().toUpperCase().equals("DIVORCIADO"))
 			this.estatistica[5] ++;
-		else if(pessoa.getEstadoCivil().equals("Viúvo"))
+		else if(pessoa.getEstadoCivil().toUpperCase().equals("VIÚVO"))
 			this.estatistica[6] ++;
 
-		if(pessoa.getMoradia().equals("Urbana")) {
+		if(pessoa.getMoradia().toUpperCase().equals("URBANA")) {
 			this.estatistica[7] ++;
 			this.estatistica[24] += pessoa.getIdade();
 		}
-		else if(pessoa.getMoradia().equals("Rural")) {
+		else if(pessoa.getMoradia().toUpperCase().equals("RURAL")) {
 			this.estatistica[8] ++;
 			this.estatistica[25] += pessoa.getIdade();
 		}
@@ -331,15 +331,15 @@ public class ArvorePessoas {
 		else if(pessoa.getIdade() > 65)
 			this.estatistica[15] ++;
 
-		if(pessoa.getCor().equals("Parda"))
+		if(pessoa.getCor().toUpperCase().equals("PARDA"))
 			this.estatistica[16] ++;
-		else if(pessoa.getCor().equals("Preta"))
+		else if(pessoa.getCor().toUpperCase().equals("PRETA"))
 			this.estatistica[17] ++;
-		else if(pessoa.getCor().equals("Branca"))
+		else if(pessoa.getCor().toUpperCase().equals("BRANCA"))
 			this.estatistica[18] ++;
-		else if(pessoa.getCor().equals("Amarela"))
+		else if(pessoa.getCor().toUpperCase().equals("AMARELA"))
 			this.estatistica[19] ++;
-		else if(pessoa.getCor().equals("Indigena"))
+		else if(pessoa.getCor().toUpperCase().equals("INDIGENA"))
 			this.estatistica[20] ++;		
 
 		this.estatistica[21] += pessoa.getIdade();

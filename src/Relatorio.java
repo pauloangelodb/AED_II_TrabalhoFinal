@@ -1,13 +1,10 @@
 
 public class Relatorio {
 
-	private Pessoa[] lista;
-
-	public Relatorio(Pessoa[] lista) {
-		this.lista = lista;
+	public Relatorio() {
 	}
 
-	public int[] relatorioCategoria() {
+	public int[] relatorioCategoria(Pessoa[] lista) {
 		int[] estatistica = new int[30];
 
 		for (Pessoa pessoa : lista) {
@@ -108,8 +105,8 @@ public class Relatorio {
 		return estatistica;
 	}
 
-	public int[] relatorioEstatistico() {
-		int[] estatistica = relatorioCategoria();
+	public int[] relatorioEstatistico(Pessoa[] lista) {
+		int[] estatistica = relatorioCategoria(lista);
 		double somaSolteiro = 0;
 		double somaCasado = 0;
 		double mediaIdadeSolteiro = (double)estatistica[26] / (double)estatistica[3];

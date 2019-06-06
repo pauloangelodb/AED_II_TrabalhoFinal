@@ -7,7 +7,7 @@ public class Aplicacao {
 
 	public static void main(String[] args) {
 		ArvorePessoas lista = new ArvorePessoas("dados.txt");
-		Relatorio relatorios = new Relatorio(lista.toList());
+		Relatorio relatorios = new Relatorio();
 		Scanner ler = new Scanner(System.in);
 		int key = 0;
 		while (key != -1) {
@@ -129,11 +129,11 @@ public class Aplicacao {
 				break;
 
 			case 5:
-				RelatorioCategoria(relatorios.relatorioCategoria());
+				RelatorioCategoria(relatorios.relatorioCategoria(lista.toList()));
 				break;
 
 			case 6:
-				RelatorioEstatistico(relatorios.relatorioEstatistico());
+				RelatorioEstatistico(relatorios.relatorioEstatistico(lista.toList()));
 				break;
 
 			case 0:

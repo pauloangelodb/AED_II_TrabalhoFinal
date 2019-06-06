@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 public class ArvorePessoas {
 	private CelulaPessoa raiz;
 
@@ -97,6 +99,9 @@ public class ArvorePessoas {
 			raizArvore.direita = adicionar(raizArvore.direita, pessoaNova);
 		}
 		else {
+			JOptionPane.showMessageDialog(null, "A pessoa " + pessoaNova.getNome() +
+					" (identidade " + pessoaNova.getIdentidade() +
+					") já foi inserida anteriormente na árvore.", "Erro", 1);
 			System.out.println("A pessoa " + pessoaNova.getNome() +
 					" (identidade " + pessoaNova.getIdentidade() +
 					") já foi inserida anteriormente na árvore.");

@@ -22,62 +22,56 @@ public class Aplicacao {
 								"0 - Sair" + "\n"
 								, "Menu", 1));
 			} catch (NumberFormatException e) {
-				lista.escreverArquivo();
 				key = -1;
 			}
 
 			long identidade = 0;
 			Pessoa pessoa = null;
-			switch (key) {
-			case 1:
-				try {
+			try {
+				switch (key) {
+				case 1:
 					identidade = Long.parseLong(JOptionPane.showInputDialog(null, "Digite o nº de Identidade da pessoa:", "Localizar", 1));
-				} catch (NumberFormatException e) {
-				}
-				pessoa = lista.localizar(identidade);
-				if (pessoa == null) {
-					JOptionPane.showMessageDialog(null, "Não Encontrado.", null, 0);
-				}else {
-					JOptionPane.showMessageDialog(null, 
-							"Nome: " + pessoa.getNome() + "\n" +
-									"Identidade: " + pessoa.getIdentidade() + "\n" +
-									"Sexo: " + pessoa.getSexo() + "\n" +
-									"Idade: " + pessoa.getIdade() + "\n" +
-									"Moradia: " + pessoa.getMoradia() + "\n" +
-									"Estado Civil: " + pessoa.getEstadoCivil() + "\n" +
-									"Cor: " + pessoa.getCor()
-									, null, 1);
-				}
-				break;
+					pessoa = lista.localizar(identidade);
+					if (pessoa == null) {
+						JOptionPane.showMessageDialog(null, "Não Encontrado.", null, 0);
+					}else {
+						JOptionPane.showMessageDialog(null, 
+								"Nome: " + pessoa.getNome() + "\n" +
+										"Identidade: " + pessoa.getIdentidade() + "\n" +
+										"Sexo: " + pessoa.getSexo() + "\n" +
+										"Idade: " + pessoa.getIdade() + "\n" +
+										"Moradia: " + pessoa.getMoradia() + "\n" +
+										"Estado Civil: " + pessoa.getEstadoCivil() + "\n" +
+										"Cor: " + pessoa.getCor()
+										, null, 1);
+					}
+					break;
 
-			case 2:
-				lista.adicionar(new Pessoa(
-						Long.parseLong(JOptionPane.showInputDialog(null, "Nº de Identidade:", "Criar Cadastro", 1)),
-						JOptionPane.showInputDialog(null, "Nome Completo:", "Criar Cadastro", 1),
-						JOptionPane.showInputDialog(null, "Sexo (M/F):", "Criar Cadastro", 1).charAt(0),
-						Integer.parseInt(JOptionPane.showInputDialog(null, "Idade:", "Criar Cadastro", 1)),
-						JOptionPane.showInputDialog(null, "Moradia (Urbana/Rural):", "Criar Cadastro", 1),
-						JOptionPane.showInputDialog(null, "Estado Civil (Solteiro/Casado/Divorciado/Viúvo):", "Criar Cadastro", 1),
-						JOptionPane.showInputDialog(null, "Cor (Parda/Preta/Branca/Amarela/Indígena):", "Criar Cadastro", 1)));
-				lista.escreverArquivo();
-				break;
+				case 2:
+					lista.adicionar(new Pessoa(
+							Long.parseLong(JOptionPane.showInputDialog(null, "Nº de Identidade:", "Criar Cadastro", 1)),
+							JOptionPane.showInputDialog(null, "Nome Completo:", "Criar Cadastro", 1),
+							JOptionPane.showInputDialog(null, "Sexo (M/F):", "Criar Cadastro", 1).charAt(0),
+							Integer.parseInt(JOptionPane.showInputDialog(null, "Idade:", "Criar Cadastro", 1)),
+							JOptionPane.showInputDialog(null, "Moradia (Urbana/Rural):", "Criar Cadastro", 1),
+							JOptionPane.showInputDialog(null, "Estado Civil (Solteiro/Casado/Divorciado/Viúvo):", "Criar Cadastro", 1),
+							JOptionPane.showInputDialog(null, "Cor (Parda/Preta/Branca/Amarela/Indígena):", "Criar Cadastro", 1)));
+					lista.escreverArquivo();
 
-			case 3:
-				lista.remover(Long.parseLong(JOptionPane.showInputDialog(null, "Identidade:", "Excluir Cadastro", 1)));
-				lista.escreverArquivo();
-				break;
+					break;
 
-			case 4:
-				try {
+				case 3:
+					lista.remover(Long.parseLong(JOptionPane.showInputDialog(null, "Identidade:", "Excluir Cadastro", 1)));
+					lista.escreverArquivo();
+					break;
+
+				case 4:
 					identidade = Long.parseLong(JOptionPane.showInputDialog(null, "Identidade:", "Localizar", 1));
-				} catch (NumberFormatException e) {
-				}
-				pessoa = lista.localizar(identidade);
-				if (pessoa == null) {
-					JOptionPane.showMessageDialog(null, "Não Encontrado.", null, 0);
-				}else {
-					int keyInterno = 0;
-					try {
+					pessoa = lista.localizar(identidade);
+					if (pessoa == null) {
+						JOptionPane.showMessageDialog(null, "Não Encontrado.", null, 0);
+					}else {
+						int keyInterno = 0;
 						keyInterno = Integer.parseInt(JOptionPane.showInputDialog(null,
 								"1 - Identidade" + "\n" +
 										"2 - Nome" + "\n" +
@@ -87,62 +81,64 @@ public class Aplicacao {
 										"6 - Estado Civil" + "\n" +
 										"7 - Cor" + "\n"
 										, "Alterações", 1));
-					} catch (NumberFormatException e) {
-					}
-					switch (keyInterno) {
-					case 1:
-						pessoa.setIdentidade(Integer.parseInt(JOptionPane.showInputDialog(null, "Nova Identidade:")));
-						break;
-					case 2:
-						pessoa.setNome(JOptionPane.showInputDialog(null, "Novo Nome:"));
-						break;
-					case 3:
-						pessoa.setSexo(JOptionPane.showInputDialog(null, "Sexo(M/F):").charAt(0));
-						break;
-					case 4:
-						pessoa.setIdade(Integer.parseInt(JOptionPane.showInputDialog(null, "Idade:")));
-						break;
-					case 5:
-						pessoa.setMoradia(JOptionPane.showInputDialog(null, "Moradia:"));
-						break;
-					case 6:
-						pessoa.setEstadoCivil(JOptionPane.showInputDialog(null, "Estado Civil:"));
-						break;
-					case 7:
-						pessoa.setCor(JOptionPane.showInputDialog(null, "Cor:"));
-						break;
+						switch (keyInterno) {
+						case 1:
+							pessoa.setIdentidade(Integer.parseInt(JOptionPane.showInputDialog(null, "Nova Identidade:")));
+							break;
+						case 2:
+							pessoa.setNome(JOptionPane.showInputDialog(null, "Novo Nome:"));
+							break;
+						case 3:
+							pessoa.setSexo(JOptionPane.showInputDialog(null, "Sexo(M/F):").charAt(0));
+							break;
+						case 4:
+							pessoa.setIdade(Integer.parseInt(JOptionPane.showInputDialog(null, "Idade:")));
+							break;
+						case 5:
+							pessoa.setMoradia(JOptionPane.showInputDialog(null, "Moradia:"));
+							break;
+						case 6:
+							pessoa.setEstadoCivil(JOptionPane.showInputDialog(null, "Estado Civil:"));
+							break;
+						case 7:
+							pessoa.setCor(JOptionPane.showInputDialog(null, "Cor:"));
+							break;
 
-					default:
-						break;
+						default:
+							break;
+						}
+						JOptionPane.showMessageDialog(null, 
+								pessoa.getNome() + "\n" +
+										" Identidade: " + pessoa.getIdentidade() + "\n" +
+										"Sexo: " + pessoa.getSexo() + "\n" +
+										"Idade: " + pessoa.getIdade() + "\n" +
+										"Moradia: " + pessoa.getMoradia() + "\n" +
+										"Estado Civil: " + pessoa.getEstadoCivil() + "\n" +
+										"Cor: " + pessoa.getCor()
+										, null, 1);
+						lista.escreverArquivo();
 					}
-					JOptionPane.showMessageDialog(null, 
-							pessoa.getNome() + "\n" +
-									" Identidade: " + pessoa.getIdentidade() + "\n" +
-									"Sexo: " + pessoa.getSexo() + "\n" +
-									"Idade: " + pessoa.getIdade() + "\n" +
-									"Moradia: " + pessoa.getMoradia() + "\n" +
-									"Estado Civil: " + pessoa.getEstadoCivil() + "\n" +
-									"Cor: " + pessoa.getCor()
-									, null, 1);
-					lista.escreverArquivo();
+					break;
+
+				case 5:
+					RelatorioCategoria(relatorios.relatorioCategoria(lista.toList()));
+					break;
+
+				case 6:
+					RelatorioEstatistico(relatorios.relatorioEstatistico(lista.toList()));
+					break;
+
+				case 0:
+					key = -1;
+					break;
+
+				default:
+					break;
 				}
-				break;
-
-			case 5:
-				RelatorioCategoria(relatorios.relatorioCategoria(lista.toList()));
-				break;
-
-			case 6:
-				RelatorioEstatistico(relatorios.relatorioEstatistico(lista.toList()));
-				break;
-
-			case 0:
-				key = -1;
-				break;
-
-			default:
-				break;
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Formato de dado incorreto!", "Erro", 1);
 			}
+
 		}
 
 		ler.close();

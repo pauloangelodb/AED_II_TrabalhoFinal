@@ -1,8 +1,7 @@
 
 public class Relatorio {
 
-	public Relatorio() {
-	}
+	public Relatorio() {}
 
 	public int[] relatorioCategoria(Pessoa[] lista) {
 		int[] estatistica = new int[30];

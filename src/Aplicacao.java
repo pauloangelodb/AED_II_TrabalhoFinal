@@ -136,7 +136,7 @@ public class Aplicacao {
 					break;
 				}
 			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Formato de dado incorreto!", "Erro", 1);
+				JOptionPane.showMessageDialog(null, "Formato de dado incorreto!", "Erro", 0);
 			}
 
 		}

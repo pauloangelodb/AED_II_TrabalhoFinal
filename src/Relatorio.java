@@ -117,8 +117,8 @@ public class Relatorio {
 			else if (pessoa.getEstadoCivil().toUpperCase().equals("CASADO"))
 				somaCasado += Math.pow(pessoa.getIdade() - mediaIdadeCasado, 2);
 		}
-		estatistica[28] = (int)somaSolteiro/estatistica[3];
-		estatistica[29] = (int)somaCasado/estatistica[4];
+		estatistica[28] = (int) Math.sqrt(somaSolteiro/estatistica[3]);
+		estatistica[29] = (int) Math.sqrt(somaCasado/estatistica[4]);
 		return estatistica;
 	}
 }
